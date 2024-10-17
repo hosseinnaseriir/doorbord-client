@@ -1,0 +1,25 @@
+import { createTheme } from "@mui/material";
+import { components } from "./components";
+
+export const theme = createTheme({
+    direction: 'rtl',
+
+    typography: {
+        fontFamily: 'vazirmatn'
+    },
+    palette: {
+        common: {
+            white: '#FFFFFF'
+        },
+        background: {
+            default: '#1D1D1D',
+        },
+        secondary: {
+            main: '#262626'
+        },
+        primary: {
+            main: '#FF6000'
+        }
+    },
+    components,
+})
