@@ -55,7 +55,7 @@ export const MuiTextField: Components['MuiTextField'] = {
       },
       style: ({ theme }: StylePropsType<TextFieldProps>) => ({
         [`.${inputBaseClasses.root}`]: {
-          borderBottom: `${theme.spacing(0.125)} solid ${theme.palette.error.main}`,
+          border: `${theme.spacing(0.125)} solid ${theme.palette.error.main}`,
           '&:focus-within': {
             borderBottom: `${theme.spacing(0.125)} solid ${theme.palette.error.main}`,
           },

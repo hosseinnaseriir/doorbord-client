@@ -10,3 +10,7 @@ body {
     font-family: "Vazirmatn", sans-serif;
     color: #FDFDFD;
 }
+
+.Toastify__toast-body{
+    font-family: "Vazirmatn", sans-serif;
+}

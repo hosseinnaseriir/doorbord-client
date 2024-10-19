@@ -14,11 +14,8 @@ export const MuiInputLabel: Components['MuiInputLabel'] = {
       [`&.${inputLabelClasses.disabled}`]: {
         color: theme.palette.text.disabled,
       },
-      [`&.${inputLabelClasses.focused}`]: {
-        color: theme.palette.common.white,
-      },
       [`&.${inputLabelClasses.error}`]: {
-        color: theme.palette.text.secondary,
+        color: theme.palette.common.white,
       },
       position: 'relative !important' as CSSProperties['position'],
       transform: 'none !important',
