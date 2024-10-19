@@ -21,7 +21,7 @@ type UserResponse = {
     token: string;
 }
 
-const loginUser = async (loginData: LoginPayload) => {
+const loginUserService = async (loginData: LoginPayload) => {
     const response = await baseInstance.post('/user/validate', loginData);
     return response.data;
 };
@@ -31,7 +31,7 @@ export const useLogin = () => {
     const [, setCookie] = useCookies(['token']);
 
     return useMutation({
-        mutationFn: loginUser,
+        mutationFn: loginUserService,
         onError(ex: AxiosError<ErrorResponse>) {
             toast.error(ex?.response?.data?.message)
         },

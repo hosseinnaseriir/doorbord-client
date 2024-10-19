@@ -4,9 +4,11 @@ import {
     createBrowserRouter,
     Outlet,
 } from "react-router-dom";
-import HomeLayout from "../../modules/home/HomeLayout/HomeLayout";
 
+
+const HomeLayout = lazy(() => import("../../modules/home/HomeLayout/HomeLayout"))
 const LoginScreen = lazy(() => import("../../pages/authentication/LoginScreen"))
+const HomeScreen = lazy(() => import("../../pages/home/HomeScreen"))
 
 export const ROUTES = {
     ROOT: '/',
@@ -26,16 +28,18 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: ROUTES.ROOT,
-                element: <h1>home page</h1>
+                element: <HomeScreen/>
             }
         ]
     },
     {
         path: ROUTES.AUTH.ROOT,
         element: <><Outlet /></>,
-        children: [{
-            path: ROUTES.AUTH.LOGIN(),
-            element: <LoginScreen />
-        }]
+        children: [
+            {
+                path: ROUTES.AUTH.LOGIN(),
+                element: <LoginScreen />
+            }
+        ]
     }
 ]);
