@@ -1,4 +1,4 @@
-import { ButtonProps, Components } from "@mui/material";
+import { buttonClasses, ButtonProps, Components } from "@mui/material";
 import { StylePropsType } from "../../../types";
 
 export const MuiButton: Components['MuiButton'] = {
@@ -8,7 +8,10 @@ export const MuiButton: Components['MuiButton'] = {
             color: theme.palette.common.white,
             borderRadius: theme.spacing(1.25),
             padding: `${theme.spacing(1)} ${theme.spacing(1.5)}`,
-            ...theme.typography.body1
-        })
+            ...theme.typography.body1,
+            [`&.${buttonClasses.disabled}`]: {
+                opacity: .75
+            }
+        }),
     }
 }

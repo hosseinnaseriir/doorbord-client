@@ -2,6 +2,7 @@ import { Box } from "../../../packages/ui"
 import { useCookies } from "react-cookie"
 import { Navigate, Outlet } from "react-router-dom"
 import { ROUTES } from "../../../app"
+import { Profilebar } from "./partials"
 
 const HomeLayout = () => {
     const [cookies] = useCookies()
@@ -13,6 +14,7 @@ const HomeLayout = () => {
             p: 1,
             backgroundColor: 'background.default'
         }}>
+            <Profilebar />
             <Outlet />
         </Box>
     )

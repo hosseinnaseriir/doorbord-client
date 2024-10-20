@@ -6,6 +6,9 @@ import { ErrorResponse } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../app';
 import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies(null, { path: '/' });
 
 type LoginPayload = { username: string; password: string }
 
@@ -37,8 +40,9 @@ export const useLogin = () => {
         },
         onSuccess(res: UserResponse) {
             if (res.token) {
-                navigate(ROUTES.ROOT);
+                navigate(ROUTES.HOME.ROOT);
                 setCookie('token', res.token);
+                baseInstance.defaults.headers['Authorization']= `Bearer ${cookies.get('token')}`
                 toast.success(res.message);
             }
         }

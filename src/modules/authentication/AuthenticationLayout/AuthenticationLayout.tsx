@@ -7,7 +7,7 @@ import { ROUTES } from "../../../app"
 export const AuthenticationLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [cookies] = useCookies()
 
-    if (cookies?.token) return <Navigate to={ROUTES.ROOT} />
+    if (cookies?.token) return <Navigate to={ROUTES.HOME.ROOT} />
 
     return (
         <Box sx={{
@@ -15,7 +15,7 @@ export const AuthenticationLayout: React.FC<{ children: ReactNode }> = ({ childr
             backgroundColor: 'background.default'
         }}>
             <Box sx={{
-                backgroundColor: 'secondary.main',
+                backgroundColor: 'secondary.dark',
                 borderRadius: 10,
                 display: 'flex',
                 justifyContent: 'center',

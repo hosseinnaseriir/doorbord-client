@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { lazy } from "react";
 import {
     createBrowserRouter,
@@ -9,9 +8,15 @@ import {
 const HomeLayout = lazy(() => import("../../modules/home/HomeLayout/HomeLayout"))
 const LoginScreen = lazy(() => import("../../pages/authentication/LoginScreen"))
 const HomeScreen = lazy(() => import("../../pages/home/HomeScreen"))
+const ManagementHomeScreen = lazy(() => import("../../pages/home/ManagementHomeScreen"))
 
 export const ROUTES = {
-    ROOT: '/',
+    HOME: {
+        ROOT: '/',
+        MANAGEMENT() {
+            return this.ROOT + '/management'
+        }
+    },
     AUTH: {
         ROOT: '/auth',
         LOGIN() {
@@ -23,12 +28,16 @@ export const ROUTES = {
 
 export const router = createBrowserRouter([
     {
-        path: ROUTES.ROOT,
+        path: ROUTES.HOME.ROOT,
         element: <HomeLayout />,
         children: [
             {
-                path: ROUTES.ROOT,
-                element: <HomeScreen/>
+                path: ROUTES.HOME.ROOT,
+                element: <HomeScreen />
+            },
+            {
+                path: ROUTES.HOME.MANAGEMENT(),
+                element: <ManagementHomeScreen/>
             }
         ]
     },
