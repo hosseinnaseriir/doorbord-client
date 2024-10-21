@@ -1,14 +1,15 @@
-import { Box } from "../../../packages/ui"
+import { Box } from "../../../packages";
 
-export const HomeModule = () => {
+export const AdminTasksModules = () => {
 
     return (
         <Box sx={{
             p: 1,
+            minHeight: '100vh',
             backgroundColor: 'background.paper'
         }}>
+
 
         </Box>
     )
 }
-

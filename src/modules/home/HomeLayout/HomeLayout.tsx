@@ -1,18 +1,22 @@
 import { Box } from "../../../packages/ui"
 import { useCookies } from "react-cookie"
-import { Navigate, Outlet } from "react-router-dom"
+import {  Outlet, useNavigate } from "react-router-dom"
 import { ROUTES } from "../../../app"
 import { Profilebar } from "./partials"
+import { useEffect } from "react"
 
 const HomeLayout = () => {
     const [cookies] = useCookies()
+    const navigate = useNavigate();
 
-    if (!cookies?.token) return <Navigate to={ROUTES.AUTH.LOGIN()} />
+    useEffect(() => {
+        if (!cookies?.token) navigate(ROUTES.AUTH.LOGIN())
+    }, [cookies])
 
     return (
         <Box sx={{
             p: 1,
-            backgroundColor: 'background.default'
+            backgroundColor: 'background.paper'
         }}>
             <Profilebar />
             <Outlet />

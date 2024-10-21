@@ -4,7 +4,7 @@ import { Avatar, Box, Container, Typography } from "../../../../../packages/ui"
 export const Profilebar = () => {
     const { data } = useGetProfile();
     const fullName = `${data?.user?.firstName} ${data?.user?.lastName}`;
-    const role = data?.user?.role === "1" ? "مدیریت" : ""
+    const role = data?.user?.role === "admin" ? "مدیریت" : ""
     return (
         <Container sx={{
             py: 2

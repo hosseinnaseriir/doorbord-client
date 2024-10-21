@@ -1,18 +1,22 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useEffect } from "react"
 import { Box } from "../../../packages/ui"
 import { useCookies } from "react-cookie"
-import { Navigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import { ROUTES } from "../../../app"
 
 export const AuthenticationLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [cookies] = useCookies()
+    const [cookies] = useCookies();
+    const navigate = useNavigate();
 
-    if (cookies?.token) return <Navigate to={ROUTES.HOME.ROOT} />
+    useEffect(() => {
+        if (cookies?.token) navigate(ROUTES.HOME.ROOT)
+    }, [cookies])
+
 
     return (
         <Box sx={{
             p: 1,
-            backgroundColor: 'background.default',
+            backgroundColor: 'background.paper',
             minHeight: '100vh',
         }}>
             <Box sx={{
@@ -27,7 +31,7 @@ export const AuthenticationLayout: React.FC<{ children: ReactNode }> = ({ childr
                 <img src="/login-vector.svg" />
             </Box>
             <Box sx={{
-                backgroundColor: 'background.default',
+                backgroundColor: 'background.paper',
                 borderRadius: 25,
                 px: 2.5,
                 py: 1.5,

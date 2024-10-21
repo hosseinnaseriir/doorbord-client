@@ -14,7 +14,7 @@ type LoginPayload = { username: string; password: string }
 
 type UserResponse = {
     message: string;
-    validatedUser: {
+    account: {
         id: 1,
         firstName: string;
         lastName: string;
@@ -40,10 +40,15 @@ export const useLogin = () => {
         },
         onSuccess(res: UserResponse) {
             if (res.token) {
-                navigate(ROUTES.HOME.ROOT);
-                setCookie('token', res.token);
-                baseInstance.defaults.headers['Authorization']= `Bearer ${cookies.get('token')}`
+                setCookie('token', res.token, {
+                    maxAge: 1200000,
+                });
+                baseInstance.defaults.headers['Authorization'] = `Bearer ${cookies.get('token')}`
                 toast.success(res.message);
+                console.log(res?.account?.role);
+                if (res?.account?.role === "super_admin") return navigate(ROUTES.HOME.MANAGEMENT());
+                navigate(ROUTES.HOME.ROOT);
+
             }
         }
     });
