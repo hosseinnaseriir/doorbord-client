@@ -1,6 +1,6 @@
-import { inputBaseClasses, selectClasses } from '@mui/material';
+import { Components, inputBaseClasses, selectClasses, SelectProps } from '@mui/material';
+import { StylePropsType } from '../../../types';
 
-import type { Components, SelectProps, StylePropsType } from '@design';
 
 export const MuiSelect: Components['MuiSelect'] = {
   defaultProps: {

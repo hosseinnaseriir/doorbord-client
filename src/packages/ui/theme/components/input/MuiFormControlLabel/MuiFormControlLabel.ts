@@ -1,6 +1,7 @@
 'use client'
-import { StylePropsType } from '@design';
-import { Components, FormControlLabelProps } from '@design';
+
+import { Components, FormControlLabelProps } from "@mui/material";
+import { StylePropsType } from "../../../types";
 
 export const MuiFormControlLabel: Components['MuiFormControlLabel'] = {
   styleOverrides: {

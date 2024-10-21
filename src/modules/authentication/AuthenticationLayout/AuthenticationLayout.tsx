@@ -12,7 +12,8 @@ export const AuthenticationLayout: React.FC<{ children: ReactNode }> = ({ childr
     return (
         <Box sx={{
             p: 1,
-            backgroundColor: 'background.default'
+            backgroundColor: 'background.default',
+            minHeight: '100vh',
         }}>
             <Box sx={{
                 backgroundColor: 'secondary.dark',
