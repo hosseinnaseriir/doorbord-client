@@ -1,15 +1,7 @@
-import { Box } from "@mui/material"
+import { AdminTasksModules } from "../../modules/admin"
 const TasksScreen = () => {
-
     return (
-        <Box sx={{
-            p: 1,
-            minHeight: '100vh',
-            backgroundColor: 'background.paper'
-        }}>
-
-
-        </Box>
+       <AdminTasksModules/>
     )
 }
 export default TasksScreen

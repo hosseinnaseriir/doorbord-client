@@ -31,11 +31,13 @@ const AdminLayout = () => {
                     backgroundColor: 'background.default',
                     minHeight: '100vh',
                 }} size={smallScreen ? 12 : 3}>
-                    <Box sx={{
-                        p: 2
-                    }}>
-                        <img src="/doorbord.png" />
-                    </Box>
+                    <Link to={ROUTES.HOME.ROOT}>
+                        <Box sx={{
+                            p: 2
+                        }}>
+                            <img src="/doorbord.png" />
+                        </Box>
+                    </Link>
                     <Box sx={{
                         p: 2,
                         width: '100%',

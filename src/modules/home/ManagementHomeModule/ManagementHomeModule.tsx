@@ -13,7 +13,7 @@ export const ManagementHomeModule = () => {
             gap: 2
         }}>
             {
-                data?.map(task => (
+                data?.map((task: any) => (
                     <TaskListItem
                         icon={<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.333 6.5415H13.333C12.9913 6.5415 12.708 6.25817 12.708 5.9165C12.708 5.57484 12.9913 5.2915 13.333 5.2915H18.333C18.6747 5.2915 18.958 5.57484 18.958 5.9165C18.958 6.25817 18.6747 6.5415 18.333 6.5415Z" fill="#FF6000" />

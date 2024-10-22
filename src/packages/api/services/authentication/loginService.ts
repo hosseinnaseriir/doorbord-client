@@ -1,4 +1,4 @@
-import { AxiosError } from './../../../../../node_modules/axios/index.d';
+import { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { baseInstance } from '../../configs';
 import { toast } from 'react-toastify';

@@ -10,6 +10,9 @@ export const MuiSelect: Components['MuiSelect'] = {
   },
   styleOverrides: {
     root: ({ theme }: StylePropsType<SelectProps>) => ({
+      position: 'relative',
+      marginTop: 28,
+      color: theme.palette.common.white,
       borderRadius: theme.spacing(1),
       width: '100%',
       padding: 0,
@@ -18,7 +21,6 @@ export const MuiSelect: Components['MuiSelect'] = {
         border: `${theme.spacing(0.125)} solid ${theme.palette.grey[600]}`,
       },
       '&:focus-within': {
-        boxShadow: `0px 0px 0px 4px #95c9ff40`,
         border: `${theme.spacing(0.125)} solid ${theme.palette.primary.main}`,
       },
       '& .MuiSelect-icon': {
@@ -26,18 +28,14 @@ export const MuiSelect: Components['MuiSelect'] = {
         height: 20,
         position: 'relative',
         top: '-0px',
-        right: '10px',
+        right: '-5px',
+        fill: theme.palette.common.white
       },
       [`&.${inputBaseClasses.adornedStart}`]: {
         '& svg:nth-of-type(1)': {
           margin: theme.spacing(1),
         },
-        fieldset: {
-          '& span': {
-            left: 30,
-            ...theme.typography.body2,
-          },
-        },
+
       },
       [`& .${selectClasses.outlined}`]: {
         padding: `${theme.spacing(1.25)} ${theme.spacing(1.5)}!important`,
@@ -48,6 +46,13 @@ export const MuiSelect: Components['MuiSelect'] = {
       },
       fieldset: {
         border: 'none',
+        top: -85,
+        right: 0,
+        ...theme.typography.body2,
+        '& span': {
+          textAlign: 'right',
+          width: '100%',
+        },
       },
       legend: {
         '& span': {
