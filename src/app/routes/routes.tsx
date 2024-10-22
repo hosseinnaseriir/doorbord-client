@@ -3,20 +3,25 @@ import {
     createBrowserRouter,
     Outlet,
 } from "react-router-dom";
-import AdminLayout from "../../modules/admin/AdminLayout/AdminLayout";
 
+const LoginScreen = lazy(() => import("../../pages/authentication/LoginScreen"))
 
 const HomeLayout = lazy(() => import("../../modules/home/HomeLayout/HomeLayout"))
-const LoginScreen = lazy(() => import("../../pages/authentication/LoginScreen"))
 const HomeScreen = lazy(() => import("../../pages/home/HomeScreen"))
 const ManagementHomeScreen = lazy(() => import("../../pages/home/ManagementHomeScreen"))
+
+const AdminLayout = lazy(() => import("../../modules/admin/AdminLayout/AdminLayout"))
 const TasksScreen = lazy(() => import("../../pages/admin/TasksScreen"))
+const FieldsScreen = lazy(() => import("../../pages/admin/FieldsScreen"))
 
 export const ROUTES = {
     ADMIN: {
         ROOT: '/admin',
         TASKS() {
             return this.ROOT + '/tasks'
+        },
+        FIELDS() {
+            return this.ROOT + '/fields'
         }
     },
     HOME: {
@@ -47,6 +52,14 @@ export const router = createBrowserRouter([
                 element:
                     <Suspense fallback={'...'}>
                         <TasksScreen />
+                    </Suspense>
+
+            },
+            {
+                path: ROUTES.ADMIN.FIELDS(),
+                element:
+                    <Suspense fallback={'...'}>
+                        <FieldsScreen />
                     </Suspense>
 
             }

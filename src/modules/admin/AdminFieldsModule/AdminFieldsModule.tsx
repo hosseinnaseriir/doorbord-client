@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Box, Button, Drawer, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "../../../packages";
-import { useGetAllTasks } from "../../../packages/api";
-import { CreateTaskModule, DeleteTaskModule } from "./partials";
+import { useGetAllTaskFields } from "../../../packages/api";
+import { CreateFieldModule, DeleteFieldModule } from "./partials";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-export const AdminTasksModules = () => {
+export const AdminFieldsModule = () => {
 
     const [openCreateTask, setOpenCreateTask] = useState<boolean>(false)
     const [openDeleteTask, setOpenDeleteTask] = useState<string>('')
-    const { data } = useGetAllTasks();
-
+    const { data } = useGetAllTaskFields();
+    console.log(data)
     return (
         <Box sx={{
             p: 1,
@@ -17,13 +17,13 @@ export const AdminTasksModules = () => {
             backgroundColor: 'background.paper'
         }}>
             <Drawer onClose={() => setOpenCreateTask(false)} anchor="bottom" open={openCreateTask}>
-                <CreateTaskModule title="ایجاد ماموریت جدید" />
+                <CreateFieldModule title="ایجاد فیلد جدید" />
             </Drawer>
 
-            <DeleteTaskModule openDeleteTask={openDeleteTask} setOpenDeleteTask={setOpenDeleteTask} />
+            <DeleteFieldModule openDeleteTask={openDeleteTask} setOpenDeleteTask={setOpenDeleteTask} />
 
             <Box>
-                <Button onClick={() => setOpenCreateTask(true)}>ایجاد ماموریت جدید</Button>
+                <Button onClick={() => setOpenCreateTask(true)}>ایجاد فیلد جدید</Button>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{
@@ -34,9 +34,9 @@ export const AdminTasksModules = () => {
                         <TableRow>
                             <TableCell>تایتل</TableCell>
                             <TableCell>کلید</TableCell>
-                            <TableCell>دسترسی</TableCell>
-                            <TableCell>دسته بندی</TableCell>
-                            <TableCell>فیلد ها</TableCell>
+                            <TableCell>نوع فیلد </TableCell>
+                            <TableCell>الزامی</TableCell>
+                            <TableCell>گزینه ها</TableCell>
                             <TableCell> عملیات</TableCell>
                         </TableRow>
                     </TableHead>
@@ -50,9 +50,9 @@ export const AdminTasksModules = () => {
                                     {row.title}
                                 </TableCell>
                                 <TableCell>{row.key}</TableCell>
-                                <TableCell>{row.permissions?.map((permission: any) => permission.name + ',')}</TableCell>
+                                <TableCell>{row.type?.name}</TableCell>
+                                <TableCell>{row.required ? "+" :"-"}</TableCell>
                                 <TableCell>{row.categories?.map((category: any) => category.name + ',')}</TableCell>
-                                <TableCell>{row.fields?.map((field: any) => field.title + ',')}</TableCell>
                                 <TableCell>
                                     <IconButton onClick={() => setOpenDeleteTask(row.id)}>
                                         <DeleteOutlineOutlinedIcon color="error" />

@@ -28,7 +28,7 @@ export const MuiSelect: Components['MuiSelect'] = {
         height: 20,
         position: 'relative',
         top: '-0px',
-        right: '-5px',
+        left: '-5px',
         fill: theme.palette.common.white
       },
       [`&.${inputBaseClasses.adornedStart}`]: {
@@ -50,8 +50,8 @@ export const MuiSelect: Components['MuiSelect'] = {
         right: 0,
         ...theme.typography.body2,
         '& span': {
-          textAlign: 'right',
           width: '100%',
+          padding: '0'
         },
       },
       legend: {
@@ -61,7 +61,6 @@ export const MuiSelect: Components['MuiSelect'] = {
           height: '20px',
           opacity: 1,
           transform: 'translateY(-36%)',
-          paddingLeft: 10,
           left: 7,
           ...theme.typography.body2,
         },

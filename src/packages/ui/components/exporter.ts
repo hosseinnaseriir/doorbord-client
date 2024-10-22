@@ -11,5 +11,9 @@ export {
     TableRow,
     Paper,
     Select,
-    MenuItem
+    MenuItem,
+    Drawer,
+    IconButton,
+
+    Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
 } from "@mui/material"

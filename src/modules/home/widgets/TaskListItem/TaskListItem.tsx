@@ -32,7 +32,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = (props) => {
             </Typography>
 
             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.5415 3.9001L7.1082 9.33343C6.46654 9.9751 6.46654 11.0251 7.1082 11.6668L12.5415 17.1001" stroke="#A9A9A9" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12.5415 3.9001L7.1082 9.33343C6.46654 9.9751 6.46654 11.0251 7.1082 11.6668L12.5415 17.1001" stroke="#A9A9A9" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </ButtonBase>
     )

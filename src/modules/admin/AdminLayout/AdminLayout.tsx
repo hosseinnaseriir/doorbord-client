@@ -31,7 +31,7 @@ const AdminLayout = () => {
                     backgroundColor: 'background.default',
                     minHeight: '100vh',
                 }} size={smallScreen ? 12 : 3}>
-                    <Link to={ROUTES.HOME.ROOT}>
+                    <Link to={ROUTES.HOME.MANAGEMENT()}>
                         <Box sx={{
                             p: 2
                         }}>
@@ -53,7 +53,16 @@ const AdminLayout = () => {
                             width: '100%',
                         }} component="li">
                             <Link to={ROUTES.ADMIN.TASKS()}>
-                                ایجاد ماموریت
+                                ماموریت ها
+                            </Link>
+                        </ButtonBase>
+                        <ButtonBase sx={{
+                            justifyContent: 'start',
+                            p: 2,
+                            width: '100%',
+                        }} component="li">
+                            <Link to={ROUTES.ADMIN.FIELDS()}>
+                                فیلد ها
                             </Link>
                         </ButtonBase>
                     </Box>

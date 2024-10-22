@@ -1,13 +1,11 @@
 import { useGetAllTasks } from "../../../packages/api"
-import { Box } from "../../../packages/ui"
+import { Container } from "../../../packages/ui"
 import { TaskListItem } from "../widgets"
 
 export const ManagementHomeModule = () => {
-
     const { data } = useGetAllTasks()
-    console.log(data)
     return (
-        <Box component='ul' sx={{
+        <Container component='ul' sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: 2
@@ -15,6 +13,7 @@ export const ManagementHomeModule = () => {
             {
                 data?.map((task: any) => (
                     <TaskListItem
+                        key={task.id}
                         icon={<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.333 6.5415H13.333C12.9913 6.5415 12.708 6.25817 12.708 5.9165C12.708 5.57484 12.9913 5.2915 13.333 5.2915H18.333C18.6747 5.2915 18.958 5.57484 18.958 5.9165C18.958 6.25817 18.6747 6.5415 18.333 6.5415Z" fill="#FF6000" />
                             <path d="M5.00033 6.5415H1.66699C1.32533 6.5415 1.04199 6.25817 1.04199 5.9165C1.04199 5.57484 1.32533 5.2915 1.66699 5.2915H5.00033C5.34199 5.2915 5.62533 5.57484 5.62533 5.9165C5.62533 6.25817 5.34199 6.5415 5.00033 6.5415Z" fill="#FF6000" />
@@ -26,8 +25,7 @@ export const ManagementHomeModule = () => {
                         title={task?.title} />
                 ))
             }
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A corrupti quia eum nam vero veniam, eius assumenda illo quis nobis earum animi itaque suscipit cumque ipsum quidem quam facere magni.
-        </Box>
+        </Container>
     )
 }
 

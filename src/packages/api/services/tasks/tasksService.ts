@@ -44,3 +44,38 @@ export const useCreateTask = () => {
         }
     });
 };
+
+
+
+const destroyTaskService = async (id: string) => {
+    const response = await baseInstance.delete(`/tasks/destroy/${id}`);
+    return response.data;
+};
+
+export const useDestroyTask = () => {
+    return useMutation({
+        mutationFn: destroyTaskService,
+        onError(ex: AxiosError<ErrorResponse>) {
+            toast.error(ex?.response?.data?.message || 'مشکلی پیش آمد');
+        },
+        onSuccess() {
+            toast.info('تسک با موفقیت پاک شد!');
+        }
+    });
+};
+
+
+// Task Fields
+
+
+const getAllTaskFieldssService = async () => {
+    const response = await baseInstance.get('/tasks/fields');
+    return response.data;
+};
+
+export const useGetAllTaskFields = () => {
+    return useQuery({
+        queryKey: ['all-task-fields'],
+        queryFn: getAllTaskFieldssService,
+    });
+};

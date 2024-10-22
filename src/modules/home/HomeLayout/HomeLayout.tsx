@@ -1,6 +1,6 @@
 import { Box } from "../../../packages/ui"
 import { useCookies } from "react-cookie"
-import {  Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { ROUTES } from "../../../app"
 import { Profilebar } from "./partials"
 import { useEffect } from "react"
@@ -16,7 +16,8 @@ const HomeLayout = () => {
     return (
         <Box sx={{
             p: 1,
-            backgroundColor: 'background.paper'
+            backgroundColor: 'background.paper',
+            minHeight: '100vh'
         }}>
             <Profilebar />
             <Outlet />
