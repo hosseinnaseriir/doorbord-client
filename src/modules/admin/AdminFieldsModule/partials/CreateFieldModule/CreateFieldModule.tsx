@@ -1,22 +1,29 @@
-import { Box, Button, Drawer, MenuItem, Select, TextField, Typography } from "../../../../../packages";
+import { Box, Button, Drawer, IconButton, MenuItem, Select, TextField, Typography } from "../../../../../packages";
 import { useCreateTaskField, useGetAllTaskFields, useUpdateTaskField } from "../../../../../packages/api";
 import { useController, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 const TASK_SCHEMA = z.object({
     title: z.string().min(2, "این فیلد ضروری است"),
     key: z.string().min(2, "این فیلد ضروری است"),
     type: z.any(),
     required: z.any(),
-    options: z.any(),
 });
 
 type TaskSchemaType = z.infer<typeof TASK_SCHEMA>;
 
 export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: any, setOpenCreateTaskField: any }> = (props) => {
 
+    const [optionFields, setOptionFields] = useState([
+        {
+            title: '',
+            value: '',
+            id: Date.now()
+        }
+    ])
     const taskFieldId = props.openCreateTaskField?.id;
 
     const { register, reset, handleSubmit, control, formState: { errors } } = useForm<TaskSchemaType>({
@@ -46,26 +53,22 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
     });
 
 
-    const {
-        field: { onChange: optionsOnChange, value: optionsValue },
-    } = useController({
-        name: "options",
-        control,
-        defaultValue: [],
-        rules: { required: 'این فیلد ضروری است' },
-    });
 
     const handleCreateNewTask = (data: any) => {
         if (taskFieldId) {
             return updateTaskFieldMutate({
                 fieldId: taskFieldId,
-                taskFieldData: data
+                taskFieldData: {
+                    ...data,
+                    options: optionFields,
+                    required: Boolean(+data?.required)
+                }
             }).then(() => {
                 refetch();
                 props.setOpenCreateTaskField(false);
             })
         }
-        mutateAsync({ ...data, options: [], required: Boolean(+data?.required) }).then(() => {
+        mutateAsync({ ...data, options: optionFields, required: Boolean(+data?.required) }).then(() => {
             refetch();
             props.setOpenCreateTaskField(false);
 
@@ -78,10 +81,19 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
                 title: props.openCreateTaskField?.title,
                 key: props.openCreateTaskField?.key,
                 required: +props.openCreateTaskField?.required,
-                type: props.openCreateTaskField?.type?.id
-            })
+                type: props.openCreateTaskField?.type?.id,
+
+            });
+            if (props.openCreateTaskField?.options?.length > 0) {
+                setOptionFields(props.openCreateTaskField?.options)
+            }
         } else {
-            reset({})
+            reset({});
+            setOptionFields([{
+                id: Date.now(),
+                title: '',
+                value: ""
+            }])
         }
     }, [props.openCreateTaskField])
 
@@ -123,14 +135,57 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
                         display: 'flex',
                         flex: 1
                     }}>
-                        <Select
-                            value={optionsValue}
-                            onChange={optionsOnChange}
-                            multiple label="گزینه ها">
-                            <MenuItem value={1}>نام مشترک(SIMPLE)</MenuItem>
-                            <MenuItem value={2}>نوع مشترک(CHOOSE)[share,dedicate]</MenuItem>
-                            <MenuItem value={3}>تاریخ مراجعه(DATE)</MenuItem>
-                        </Select>
+
+                        {optionFields?.map((opt, index) => {
+                            return <Box key={index} sx={{
+                                gap: 2,
+                                display: 'flex',
+                                alignItems: 'end'
+                            }}>
+                                <TextField value={optionFields.find(i => i.id === opt.id)?.value} onChange={(_event) => {
+                                    setOptionFields(prev => prev.map(i => {
+                                        if (i.id === opt.id) {
+                                            return {
+                                                id: i.id,
+                                                value: _event.target.value,
+                                                title: _event.target.value
+                                            }
+                                        }
+                                        return i
+                                    }))
+                                }} label={index === 0 && "گزینه ها"} />
+                                {
+                                    index === optionFields.length - 1 &&
+                                    (
+                                        <IconButton onClick={() => {
+                                            setOptionFields(prev => [...prev, {
+                                                id: Date.now(),
+                                                title: '',
+                                                value: ''
+                                            }])
+                                        }} sx={{
+                                            color: 'common.white'
+                                        }}>
+                                            <AddRoundedIcon />
+                                        </IconButton>
+                                    )
+
+                                }
+                                <IconButton onClick={() => {
+                                    if (optionFields.length === 1) setOptionFields([{
+                                        id: Date.now(),
+                                        title: '',
+                                        value: ""
+                                    }])
+                                    setOptionFields(prev => prev.filter(i => i.id !== opt.id))
+                                }} sx={{
+                                    color: 'common.white'
+                                }}>
+                                    <DeleteOutlineRoundedIcon />
+                                </IconButton>
+                            </Box>
+                        })
+                        }
                         <Select
                             value={requiredValue}
                             onChange={requiredOnChange}

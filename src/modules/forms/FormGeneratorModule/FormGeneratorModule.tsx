@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useGetTaskFieldByTaskId } from "../../../packages/api"
-import { Box, Button, Container, Select, TextField } from "../../../packages/ui"
+import { Box, Button, Container, MenuItem, Select, TextField } from "../../../packages/ui"
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
 
@@ -13,7 +13,14 @@ export const FormGeneratorModule: React.FC<any> = (props) => {
     const fieldsElements = useMemo(() => {
         const FIELDS = {
             SIMPLE: (field: any) => <TextField key={field?.id} label={field?.title} {...register(field?.key)} />,
-            CHOOSE: (field: any) => <Select key={field?.id} label={field?.title} />,
+            CHOOSE: (field: any) => {
+                console.log({ field })
+                return <Select  key={field?.id} label={field?.title}>
+                    {
+                        field?.options?.map((opt: any) => (<MenuItem value={opt.value} key={opt.id}>{opt.title}</MenuItem>))
+                    }
+                </Select>
+            },
         }
         return data?.task?.fields?.map?.((field: any) => {
             // @ts-ignore
