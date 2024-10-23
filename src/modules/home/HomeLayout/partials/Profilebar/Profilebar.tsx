@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie";
-import {  useGetProfileRole } from "../../../../../packages/api"
+import { useGetProfileRole } from "../../../../../packages/api"
 import { Avatar, Box, Container, IconButton, Typography } from "../../../../../packages/ui"
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../../../../app";
 export const Profilebar = () => {
     const profile = useGetProfileRole();
-    const [, , removeCookie] = useCookies(['token'])
-    const fullName = `${profile?.profile?.user?.firstName} ${profile?.profile?.user?.lastName}`;
-    
+    const [, , removeCookie] = useCookies(['token']);
+    const fullName = `${profile?.profile?.user?.firstName ?? ''} ${profile?.profile?.user?.lastName ?? ''}`;
+
     return (
         <Container sx={{
             py: 2

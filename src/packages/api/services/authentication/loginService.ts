@@ -45,8 +45,7 @@ export const useLogin = () => {
                 });
                 baseInstance.defaults.headers['Authorization'] = `Bearer ${cookies.get('token')}`
                 toast.success(res.message);
-                console.log(res?.account?.role);
-                if (res?.account?.role === "super_admin") return navigate(ROUTES.HOME.ROOT);
+                if (res?.account?.role === import.meta.env.VITE_SUPER_ADMIN_ROLE) return navigate(ROUTES.HOME.ROOT);
                 navigate(ROUTES.HOME.ROOT);
 
             }

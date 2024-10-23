@@ -61,7 +61,7 @@ export const AdminTasksModules = () => {
                                             <DeleteOutlineOutlinedIcon color="error" />
                                         </IconButton>
                                         <IconButton onClick={() => setOpenCreateTask(row)}>
-                                            <CreateRoundedIcon color="error" />
+                                            <CreateRoundedIcon color="info" />
                                         </IconButton>
                                     </Box>
                                 </TableCell>

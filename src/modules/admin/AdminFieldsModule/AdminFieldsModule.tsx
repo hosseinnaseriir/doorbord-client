@@ -10,7 +10,6 @@ export const AdminFieldsModule = () => {
     const [openCreateTaskField, setOpenCreateTaskField] = useState<boolean>(false)
     const [openDeleteTask, setOpenDeleteTask] = useState<string>('')
     const { data } = useGetAllTaskFields();
-    console.log(data, 'datadata')
     return (
         <Box sx={{
             p: 1,
@@ -61,10 +60,9 @@ export const AdminFieldsModule = () => {
                                         <DeleteOutlineOutlinedIcon color="error" />
                                     </IconButton>
                                     <IconButton onClick={() => setOpenCreateTaskField(row)}>
-                                        <CreateRoundedIcon color="error" />
+                                        <CreateRoundedIcon color="info"  />
                                     </IconButton>
                                 </TableCell>
-
                             </TableRow>
                         ))}
                     </TableBody>

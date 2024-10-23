@@ -36,6 +36,12 @@ export const useGetProfileRole = () => {
         id: 2,
         role,
         title: "مدیریت",
+    };
+    return {
+        profile: data,
+        id: 2,
+        role,
+        title: "کاربر",
     }
 }
 

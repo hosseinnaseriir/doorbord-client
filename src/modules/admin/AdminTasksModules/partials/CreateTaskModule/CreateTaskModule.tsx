@@ -109,7 +109,7 @@ export const CreateTaskModule: React.FC<{ title: string, openCreateTask: any; se
                         width: '50%'
                     }}>
                         <TextField {...register("title")} label="تایتل" />
-                        <TextField {...register("key")} label="کلید" />
+                        <TextField {...register("key")} label="کلید" placeholder="حروف کوچک انگلیسی بدون فاصله" />
                         <Select
                             value={categoryValue}
                             onChange={categoryOnChange}

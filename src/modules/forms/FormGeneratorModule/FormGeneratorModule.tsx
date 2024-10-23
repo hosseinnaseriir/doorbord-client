@@ -8,14 +8,16 @@ export const FormGeneratorModule: React.FC<any> = (props) => {
     const { id } = useParams()
     const { register, handleSubmit, formState: { errors } } = useForm<any>();
     const { data } = useGetTaskFieldByTaskId(id ?? '');
-    console.log({ data });
 
     const fieldsElements = useMemo(() => {
         const FIELDS = {
             SIMPLE: (field: any) => <TextField key={field?.id} label={field?.title} {...register(field?.key)} />,
             CHOOSE: (field: any) => {
-                console.log({ field })
-                return <Select  key={field?.id} label={field?.title}>
+                return <Select
+                    key={field?.id} label={field?.title}
+                    {...register(field?.key)}
+                    defaultValue=""
+                >
                     {
                         field?.options?.map((opt: any) => (<MenuItem value={opt.value} key={opt.id}>{opt.title}</MenuItem>))
                     }

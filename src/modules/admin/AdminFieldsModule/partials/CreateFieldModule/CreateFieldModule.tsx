@@ -119,7 +119,7 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
                         flex: 1
                     }}>
                         <TextField {...register("title")} label="تایتل" />
-                        <TextField {...register("key")} label="کلید" />
+                        <TextField {...register("key")} label="کلید" placeholder="حروف کوچک انگلیسی بدون فاصله" />
                         <Select
                             value={categoryValue}
                             onChange={categoryOnChange}
@@ -136,7 +136,7 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
                         flex: 1
                     }}>
 
-                        {optionFields?.map((opt, index) => {
+                        {categoryValue === 2 && optionFields?.map((opt, index) => {
                             return <Box key={index} sx={{
                                 gap: 2,
                                 display: 'flex',
@@ -184,8 +184,7 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
                                     <DeleteOutlineRoundedIcon />
                                 </IconButton>
                             </Box>
-                        })
-                        }
+                        })}
                         <Select
                             value={requiredValue}
                             onChange={requiredOnChange}

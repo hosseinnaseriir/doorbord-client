@@ -4,6 +4,19 @@ import { ROUTES } from "../../../app";
 import { useEffect, useState } from "react";
 import { Box, ButtonBase, Grid, useTheme, useMediaQuery, IconButton } from "../../../packages";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+
+
+const MENU_ITEMS = [
+    {
+        title: " ماموریت ها",
+        to: ROUTES.ADMIN.TASKS()
+    },
+    {
+        title: 'فیلد ها',
+        to: ROUTES.ADMIN.FIELDS()
+    }
+]
+
 const AdminLayout = () => {
     const { data, isPending } = useGetProfile();
     const [openMenu, setOpenMenu] = useState(false)
@@ -31,7 +44,8 @@ const AdminLayout = () => {
                 <Grid sx={{
                     backgroundColor: 'background.default',
                     overflow: 'hidden',
-                    height: !smallScreen ? '100vh' : openMenu ? '100vh' : '80px',
+                    minHeight: !smallScreen ? '100vh' : 'auto',
+                    height: !smallScreen ? 'auto' : openMenu ? '100vh' : '80px',
                 }} size={smallScreen ? 12 : 3}>
                     <Box sx={{
                         px: 2,
@@ -67,28 +81,26 @@ const AdminLayout = () => {
                                 color: t => t.palette.common.white
                             }
                         }} component="ul">
-                        <ButtonBase sx={{
-                            justifyContent: 'start',
-                            p: 2,
-                            width: '100%',
-                        }} component="li">
-                            <Link to={ROUTES.ADMIN.TASKS()}>
-                                ماموریت ها
-                            </Link>
-                        </ButtonBase>
-                        <ButtonBase sx={{
-                            justifyContent: 'start',
-                            p: 2,
-                            width: '100%',
-                        }} component="li">
-                            <Link to={ROUTES.ADMIN.FIELDS()}>
-                                فیلد ها
-                            </Link>
-                        </ButtonBase>
+                        {
+                            MENU_ITEMS.map(menu => (
+                                <Link key={menu.to} to={menu.to}>
+                                    <ButtonBase sx={{
+                                        justifyContent: 'start',
+                                        p: 2,
+                                        width: '100%',
+                                    }} component="li">
+                                        {menu.title}
+                                    </ButtonBase>
+                                </Link>
+                            ))
+                        }
                     </Box>
                 </Grid>
                 {/* @ts-ignore */}
-                <Grid size={smallScreen ? 12 : 9}>
+                <Grid sx={{
+                    maxHeight: 'calc(100vh)',
+                    overflowY: 'auto',
+                }} size={smallScreen ? 12 : 9}>
                     <Outlet />
                 </Grid>
             </Grid>
