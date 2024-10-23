@@ -13,6 +13,8 @@ const ManagementHomeScreen = lazy(() => import("../../pages/home/ManagementHomeS
 const AdminLayout = lazy(() => import("../../modules/admin/AdminLayout/AdminLayout"))
 const TasksScreen = lazy(() => import("../../pages/admin/TasksScreen"))
 const FieldsScreen = lazy(() => import("../../pages/admin/FieldsScreen"))
+const FormGeneratorScreen = lazy(() => import("../../pages/forms/FormGeneratorScreen"))
+const FormsLayout = lazy(() => import("../../modules/forms/FormsLayout/FormsLayout"))
 
 export const ROUTES = {
     ADMIN: {
@@ -35,6 +37,9 @@ export const ROUTES = {
         LOGIN() {
             return this.ROOT + '/login'
         }
+    },
+    FORMS: {
+        ROOT: '/forms',
     }
 }
 
@@ -98,6 +103,18 @@ export const router = createBrowserRouter([
                     <Suspense fallback={'...'}>
                         <LoginScreen />
                     </Suspense>
+            }
+        ]
+    },
+    {
+        path: ROUTES.FORMS.ROOT,
+        element: <Suspense fallback={'...'}>
+            <FormsLayout />
+        </Suspense>,
+        children: [
+            {
+                path: ROUTES.FORMS.ROOT + '/:id',
+                element: <FormGeneratorScreen />
             }
         ]
     }

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Box, Button, Drawer, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "../../../packages";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "../../../packages";
 import { useGetAllTasks } from "../../../packages/api";
 import { CreateTaskModule, DeleteTaskModule } from "./partials";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 
 export const AdminTasksModules = () => {
 
@@ -16,10 +17,8 @@ export const AdminTasksModules = () => {
             minHeight: '100vh',
             backgroundColor: 'background.paper'
         }}>
-            <Drawer onClose={() => setOpenCreateTask(false)} anchor="bottom" open={openCreateTask}>
-                <CreateTaskModule title="ایجاد ماموریت جدید" />
-            </Drawer>
 
+            <CreateTaskModule setOpenCreateTask={setOpenCreateTask} openCreateTask={openCreateTask} title="ایجاد ماموریت جدید" />
             <DeleteTaskModule openDeleteTask={openDeleteTask} setOpenDeleteTask={setOpenDeleteTask} />
 
             <Box>
@@ -54,9 +53,17 @@ export const AdminTasksModules = () => {
                                 <TableCell>{row.categories?.map((category: any) => category.name + ',')}</TableCell>
                                 <TableCell>{row.fields?.map((field: any) => field.title + ',')}</TableCell>
                                 <TableCell>
-                                    <IconButton onClick={() => setOpenDeleteTask(row.id)}>
-                                        <DeleteOutlineOutlinedIcon color="error" />
-                                    </IconButton>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        gap: 1
+                                    }}>
+                                        <IconButton onClick={() => setOpenDeleteTask(row.id)}>
+                                            <DeleteOutlineOutlinedIcon color="error" />
+                                        </IconButton>
+                                        <IconButton onClick={() => setOpenCreateTask(row)}>
+                                            <CreateRoundedIcon color="error" />
+                                        </IconButton>
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}

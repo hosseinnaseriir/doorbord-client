@@ -9,8 +9,14 @@
 body {
     font-family: "Vazirmatn", sans-serif;
     color: #FDFDFD;
+    background-color: #1D1D1D;
 }
 
-.Toastify__toast-body{
+.Toastify__toast-body {
     font-family: "Vazirmatn", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }

@@ -1,12 +1,11 @@
 import { Button } from "../../../../../packages";
 import React from "react";
 import { Dialog, DialogTitle, DialogActions } from "../../../../../packages";
-import { useDestroyTask, useGetAllTasks } from "../../../../../packages/api";
-
+import { useDeleteTaskField, useGetAllTaskFields } from "../../../../../packages/api";
 
 export const DeleteFieldModule: React.FC<{ openDeleteTask: any; setOpenDeleteTask: any }> = (props) => {
-    const { mutateAsync: destroyTaskMutate, isPending } = useDestroyTask()
-    const { refetch: refetchAllTasks } = useGetAllTasks();
+    const { mutateAsync: destroyTaskFieldMutate, isPending } = useDeleteTaskField()
+    const { refetch: refetchAllTaskFields } = useGetAllTaskFields();
 
     return (
 
@@ -17,7 +16,7 @@ export const DeleteFieldModule: React.FC<{ openDeleteTask: any; setOpenDeleteTas
             <DialogTitle sx={{
                 color: t => t.palette.common.white
             }}>
-                آیا از حذف این موزد اطمینان دارید؟
+                آیا از حذف این مورد اطمینان دارید؟
             </DialogTitle>
 
             <DialogActions sx={{
@@ -26,8 +25,8 @@ export const DeleteFieldModule: React.FC<{ openDeleteTask: any; setOpenDeleteTas
             }}>
                 <Button color="secondary" variant="outlined" onClick={() => props.setOpenDeleteTask('')}>انصراف</Button>
                 <Button disabled={isPending} onClick={() => {
-                    destroyTaskMutate(props.openDeleteTask).then(() => {
-                        refetchAllTasks()
+                    destroyTaskFieldMutate(props.openDeleteTask).then(() => {
+                        refetchAllTaskFields()
                         props.setOpenDeleteTask('')
                     })
                 }} autoFocus>

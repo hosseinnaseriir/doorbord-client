@@ -1,29 +1,32 @@
 import { useState } from "react";
-import { Box, Button, Drawer, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "../../../packages";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "../../../packages";
 import { useGetAllTaskFields } from "../../../packages/api";
 import { CreateFieldModule, DeleteFieldModule } from "./partials";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 
 export const AdminFieldsModule = () => {
 
-    const [openCreateTask, setOpenCreateTask] = useState<boolean>(false)
+    const [openCreateTaskField, setOpenCreateTaskField] = useState<boolean>(false)
     const [openDeleteTask, setOpenDeleteTask] = useState<string>('')
     const { data } = useGetAllTaskFields();
-    console.log(data)
+    console.log(data, 'datadata')
     return (
         <Box sx={{
             p: 1,
             minHeight: '100vh',
             backgroundColor: 'background.paper'
         }}>
-            <Drawer onClose={() => setOpenCreateTask(false)} anchor="bottom" open={openCreateTask}>
-                <CreateFieldModule title="ایجاد فیلد جدید" />
-            </Drawer>
+
+            <CreateFieldModule
+                setOpenCreateTaskField={setOpenCreateTaskField}
+                openCreateTaskField={openCreateTaskField}
+                title="ایجاد فیلد جدید" />
 
             <DeleteFieldModule openDeleteTask={openDeleteTask} setOpenDeleteTask={setOpenDeleteTask} />
 
             <Box>
-                <Button onClick={() => setOpenCreateTask(true)}>ایجاد فیلد جدید</Button>
+                <Button onClick={() => setOpenCreateTaskField(true)}>ایجاد فیلد جدید</Button>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{
@@ -51,13 +54,17 @@ export const AdminFieldsModule = () => {
                                 </TableCell>
                                 <TableCell>{row.key}</TableCell>
                                 <TableCell>{row.type?.name}</TableCell>
-                                <TableCell>{row.required ? "+" :"-"}</TableCell>
-                                <TableCell>{row.categories?.map((category: any) => category.name + ',')}</TableCell>
+                                <TableCell>{row.required ? "+" : "-"}</TableCell>
+                                <TableCell>{row.options?.map((opt: any) => opt.title + ',')}</TableCell>
                                 <TableCell>
                                     <IconButton onClick={() => setOpenDeleteTask(row.id)}>
                                         <DeleteOutlineOutlinedIcon color="error" />
                                     </IconButton>
+                                    <IconButton onClick={() => setOpenCreateTaskField(row)}>
+                                        <CreateRoundedIcon color="error" />
+                                    </IconButton>
                                 </TableCell>
+
                             </TableRow>
                         ))}
                     </TableBody>

@@ -17,7 +17,7 @@ export const DeleteTaskModule: React.FC<{ openDeleteTask: any; setOpenDeleteTask
             <DialogTitle sx={{
                 color: t => t.palette.common.white
             }}>
-                آیا از حذف این موزد اطمینان دارید؟
+                آیا از حذف این مورد اطمینان دارید؟
             </DialogTitle>
 
             <DialogActions sx={{
