@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useGetTaskFieldByTaskId } from "../../../packages/api"
+import { useGetTaskFieldByTaskId, useSubmitTask } from "../../../packages/api"
 import { Box, Button, Container, MenuItem, Select, TextField } from "../../../packages/ui"
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
@@ -9,13 +9,18 @@ export const FormGeneratorModule: React.FC<any> = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<any>();
     const { data } = useGetTaskFieldByTaskId(id ?? '');
 
+    const { mutateAsync } = useSubmitTask()
     const fieldsElements = useMemo(() => {
         const FIELDS = {
-            SIMPLE: (field: any) => <TextField key={field?.id} label={field?.title} {...register(field?.key)} />,
+            SIMPLE: (field: any) => <TextField key={field?.id} label={field?.title} {...register(`${field?.key}-${field?.id}`, {
+                required: field?.required
+            })} />,
             CHOOSE: (field: any) => {
                 return <Select
                     key={field?.id} label={field?.title}
-                    {...register(field?.key)}
+                    {...register(`${field?.key}-${field?.id}`, {
+                        required: field?.required
+                    })}
                     defaultValue=""
                 >
                     {
@@ -28,8 +33,8 @@ export const FormGeneratorModule: React.FC<any> = (props) => {
             // @ts-ignore
             return FIELDS[field?.type?.name]?.(field)
         })
+    }, [data]);
 
-    }, [data])
     return (
         <Box>
             <Container sx={{
@@ -39,7 +44,24 @@ export const FormGeneratorModule: React.FC<any> = (props) => {
                 <Box
                     component="form"
                     onSubmit={handleSubmit(data => {
-                        console.log(data)
+                        const fields: Array<{
+                            fieldId: number;
+                            value: string;
+                        }> = [];
+                        Object.entries(data).forEach(([key, value]) => {
+                            const fieldId = key.split("-")[1];
+                            fields.push({
+                                fieldId: +fieldId,
+                                // @ts-ignore
+                                value
+                            })
+                        });
+                        mutateAsync({
+                            taskId: +(id ?? ''),
+                            taskSubmission: {
+                                fields,
+                            }
+                        })
                     })}
                     sx={{
                         display: 'flex',
@@ -49,7 +71,7 @@ export const FormGeneratorModule: React.FC<any> = (props) => {
                     {fieldsElements}
                     <Button type="submit">ارسال به سرپرست</Button>
                 </Box>
-            </Container>
-        </Box>
+            </Container >
+        </Box >
     )
 }

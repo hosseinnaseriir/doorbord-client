@@ -112,12 +112,11 @@ export const useGetTaskFieldByTaskId = (taskId: string | number) => {
 };
 
 
-// Define the payload type for creating a task field
 export type CreateTaskFieldPayload = {
     key: string;
     title: string;
     type: {
-        id: number; 
+        id: number;
     };
     required: boolean;
     options?: {
@@ -144,13 +143,11 @@ export const useCreateTaskField = () => {
     });
 };
 
-// Service to update a task field
 const updateTaskFieldService = async ({ fieldId, taskFieldData }: { fieldId: number | string; taskFieldData: CreateTaskFieldPayload }) => {
     const response = await baseInstance.put(`/tasks/fields/${fieldId}`, taskFieldData);
     return response.data;
 };
 
-// Hook to update a task field
 export const useUpdateTaskField = () => {
     return useMutation({
         mutationFn: updateTaskFieldService,
@@ -163,13 +160,11 @@ export const useUpdateTaskField = () => {
     });
 };
 
-// Service to delete a task field
 const deleteTaskFieldService = async (id: string) => {
     const response = await baseInstance.delete(`/tasks/fields/${id}`);
     return response.data;
 };
 
-// Hook to delete a task field
 export const useDeleteTaskField = () => {
     return useMutation({
         mutationFn: deleteTaskFieldService,
@@ -178,6 +173,44 @@ export const useDeleteTaskField = () => {
         },
         onSuccess() {
             toast.info('فیلد تسک با موفقیت پاک شد!');
+        }
+    });
+};
+
+
+export enum TaskSubmissionStatus {
+    BACKLOG = 'BACKLOG',
+    PENDING = 'PENDING',
+    DOING = 'DOING',
+    BLOCKED = 'BLOCKED',
+    DONE = 'DONE',
+}
+
+// Task Submittion 
+const submitTaskService = async (
+    taskFieldData: {
+        taskId: number;
+        taskSubmission: {
+            status?: TaskSubmissionStatus;
+            fields: Array<{
+                fieldId: number;
+                value: string;
+            }>
+        }
+    }
+) => {
+    const response = await baseInstance.post(`/tasks/form/${taskFieldData.taskId}`, taskFieldData.taskSubmission);
+    return response.data;
+};
+
+export const useSubmitTask = () => {
+    return useMutation({
+        mutationFn: submitTaskService,
+        onError(ex: AxiosError<ErrorResponse>) {
+            toast.error(ex?.response?.data?.message || 'مشکلی پیش آمد');
+        },
+        onSuccess() {
+            toast.success('فیلد با موفقیت ایجاد شد!');
         }
     });
 };
