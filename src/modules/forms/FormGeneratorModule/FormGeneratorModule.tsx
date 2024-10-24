@@ -4,9 +4,9 @@ import { Box, Button, Container, MenuItem, Select, TextField } from "../../../pa
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
 
-export const FormGeneratorModule: React.FC<any> = (props) => {
+export const FormGeneratorModule: React.FC<any> = () => {
     const { id } = useParams()
-    const { register, handleSubmit, formState: { errors } } = useForm<any>();
+    const { register, handleSubmit } = useForm<any>();
     const { data } = useGetTaskFieldByTaskId(id ?? '');
 
     const { mutateAsync } = useSubmitTask()

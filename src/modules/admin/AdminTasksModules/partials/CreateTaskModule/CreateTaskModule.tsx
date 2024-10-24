@@ -17,7 +17,7 @@ type TaskSchemaType = z.infer<typeof TASK_SCHEMA>;
 
 export const CreateTaskModule: React.FC<{ title: string, openCreateTask: any; setOpenCreateTask: any; }> = (props) => {
 
-    const { register, handleSubmit, reset, control, formState: { errors } } = useForm<TaskSchemaType>({
+    const { register, handleSubmit, reset, control } = useForm<TaskSchemaType>({
         resolver: zodResolver(TASK_SCHEMA),
     });
     const taskId = props.openCreateTask?.id;

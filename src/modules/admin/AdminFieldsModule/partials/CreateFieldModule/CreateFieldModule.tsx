@@ -26,7 +26,7 @@ export const CreateFieldModule: React.FC<{ title: string, openCreateTaskField: a
     ])
     const taskFieldId = props.openCreateTaskField?.id;
 
-    const { register, reset, handleSubmit, control, formState: { errors } } = useForm<TaskSchemaType>({
+    const { register, reset, handleSubmit, control } = useForm<TaskSchemaType>({
         resolver: zodResolver(TASK_SCHEMA),
     });
 
