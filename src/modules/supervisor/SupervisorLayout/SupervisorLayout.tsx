@@ -7,7 +7,6 @@ import { ROUTES } from "../../../app";
 const SupervisorLayout = () => {
     const { id } = useParams()
     const { data } = useGetTaskSubmissionById(id ?? '');
-    console.log(data)
     return (
         <Container maxWidth="sm">
             <Box sx={{

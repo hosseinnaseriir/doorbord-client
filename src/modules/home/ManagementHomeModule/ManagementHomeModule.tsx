@@ -1,15 +1,22 @@
 import { useState } from "react"
 import { Box, Container, Tabs, Tab } from "../../../packages/ui"
 import { CustomTabPanel, TasksHistory, TasksList } from "./partials"
+import { useGetProfileRole } from "../../../packages/api";
 
 
 export const ManagementHomeModule = () => {
     const [tabvalue, setTabValue] = useState(0);
 
+    const { isSupervisor, isPending } = useGetProfileRole()
+
+    if (isSupervisor || isPending) return (<Container>
+        <TasksHistory />
+    </Container>)
+
+
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
-
     return (
         <Container>
             <Box sx={{ width: '100%' }}>

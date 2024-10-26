@@ -6,20 +6,24 @@ import { useForm } from "react-hook-form"
 
 export const FormGeneratorModule: React.FC<any> = () => {
     const { id } = useParams()
-    const { register, handleSubmit } = useForm<any>();
+    const { register, handleSubmit, formState: { errors } } = useForm<any>();
     const { data } = useGetTaskFieldByTaskId(id ?? '');
-
     const { mutateAsync } = useSubmitTask()
     const fieldsElements = useMemo(() => {
         const FIELDS = {
-            SIMPLE: (field: any) => <TextField key={field?.id} label={field?.title} {...register(`${field?.key}-${field?.id}`, {
-                required: field?.required
-            })} />,
+            SIMPLE: (field: any) => <TextField
+                // @ts-ignore
+                helperText={errors?.[`${field?.key}-${field?.id}`]?.message} error={!!errors?.[`${field?.key}-${field?.id}`]?.message}
+                key={field?.id} label={field?.title} {...register(`${field?.key}-${field?.id}`, {
+                    required: field?.required
+                })} />,
             CHOOSE: (field: any) => {
                 return <Select
+                    // @ts-ignore
+                    helperText={errors?.[`${field?.key}-${field?.id}`]?.message} error={!!errors?.[`${field?.key}-${field?.id}`]?.message}
                     key={field?.id} label={field?.title}
                     {...register(`${field?.key}-${field?.id}`, {
-                        required: field?.required
+                        required: field?.required ? `${field?.title} is required` : false,
                     })}
                     defaultValue=""
                 >

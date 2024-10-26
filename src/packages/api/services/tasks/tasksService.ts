@@ -243,3 +243,18 @@ export const useGetTaskSubmissionById = (submissionId: string) => {
         queryFn: () => getTaskSubmissionByIdService(+submissionId),
     });
 };
+
+
+const deleteTaskSubmissionByIdService = async (submissionId: number) => {
+    const response = await baseInstance.delete(`/tasks/submissions/${submissionId}`);
+    return response.data;
+};
+
+export const useDeleteTaskSubmissionById = () => {
+    return useMutation({
+        mutationFn: (submissionId: number) => deleteTaskSubmissionByIdService(submissionId),
+        onSuccess: () => {
+            toast.info("ماموریت حذف شد!")
+        },
+    });
+};

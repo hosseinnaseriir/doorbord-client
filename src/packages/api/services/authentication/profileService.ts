@@ -17,11 +17,12 @@ export const useGetProfile = () => {
 };
 
 export const useGetProfileRole = () => {
-    const { data } = useGetProfile();
+    const { data, isPending } = useGetProfile();
 
     const role = data?.user?.role;
     const isSuperAdmin = role === import.meta.env.VITE_SUPER_ADMIN_ROLE;
     const isAdmin = role === import.meta.env.VITE_ADMIN_ROLE
+    const isSupervisor = role === import.meta.env.VITE_SUPERVISOR_ROLE
 
     if (isSuperAdmin) return {
         isSuperAdmin,
@@ -40,9 +41,11 @@ export const useGetProfileRole = () => {
     };
     return {
         profile: data,
+        isSupervisor,
         id: 2,
         role,
         title: "کاربر",
+        isPending,
     }
 }
 

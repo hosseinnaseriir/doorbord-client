@@ -11,7 +11,7 @@ export const HomeModule = () => {
         switch (profile?.role) {
             case import.meta.env.VITE_SUPER_ADMIN_ROLE:
                 return <AdminHome />
-            case import.meta.env.VITE_ADMIN_ROLE:
+            case import.meta.env.VITE_SUPERVISOR_ROLE:
                 return <AdminHome />
             default:
                 return <>default</>
