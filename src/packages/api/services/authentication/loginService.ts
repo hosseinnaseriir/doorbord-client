@@ -45,8 +45,15 @@ export const useLogin = () => {
                 });
                 baseInstance.defaults.headers['Authorization'] = `Bearer ${cookies.get('token')}`
                 toast.success(res.message);
-                if (res?.account?.role === import.meta.env.VITE_SUPER_ADMIN_ROLE) return navigate(ROUTES.HOME.ROOT);
-                navigate(ROUTES.HOME.ROOT);
+                // ManagementHomeModule
+                switch (res?.account?.role) {
+                    case import.meta.env.VITE_SUPER_ADMIN_ROLE:
+                        return navigate(ROUTES.HOME.ROOT);
+                    case import.meta.env.VITE_SUPERVISOR_ROLE:
+                        return navigate(ROUTES.HOME.MANAGEMENT());
+                    default:
+                        navigate(ROUTES.HOME.MANAGEMENT());
+                }
 
             }
         }

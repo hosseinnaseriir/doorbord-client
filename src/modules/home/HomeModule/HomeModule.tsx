@@ -12,7 +12,7 @@ export const HomeModule = () => {
             case import.meta.env.VITE_SUPER_ADMIN_ROLE:
                 return <AdminHome />
             case import.meta.env.VITE_SUPERVISOR_ROLE:
-                return <AdminHome />
+                return <>default</>
             default:
                 return <>default</>
         }
