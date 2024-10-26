@@ -26,6 +26,8 @@ baseInstance.interceptors.response.use(
 
             switch (status) {
                 case 401:
+                    cookies.remove('token');
+                    toast.error("لطفا وارد شوید")
                     console.error('Unauthorized: Please log in again.');
                     break;
                 case 403:

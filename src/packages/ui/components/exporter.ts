@@ -15,5 +15,7 @@ export {
     Drawer,
     IconButton,
 
+    Tabs, Tab,
+
     Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions
 } from "@mui/material"

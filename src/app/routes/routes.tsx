@@ -15,6 +15,8 @@ const TasksScreen = lazy(() => import("../../pages/admin/TasksScreen"))
 const FieldsScreen = lazy(() => import("../../pages/admin/FieldsScreen"))
 const FormGeneratorScreen = lazy(() => import("../../pages/forms/FormGeneratorScreen"))
 const FormsLayout = lazy(() => import("../../modules/forms/FormsLayout/FormsLayout"))
+const SupervisorLayout = lazy(() => import("../../modules/supervisor/SupervisorLayout/SupervisorLayout"))
+const SupervidorAssignTask = lazy(() => import("../../pages/supervidor/SupervidorAssignTask"))
 
 export const ROUTES = {
     ADMIN: {
@@ -40,6 +42,9 @@ export const ROUTES = {
     },
     FORMS: {
         ROOT: '/forms',
+    },
+    SUPERVISOR: {
+        ROOT: '/supervisor'
     }
 }
 
@@ -115,6 +120,20 @@ export const router = createBrowserRouter([
             {
                 path: ROUTES.FORMS.ROOT + '/:id',
                 element: <FormGeneratorScreen />
+            }
+        ]
+    },
+    {
+        path: ROUTES.SUPERVISOR.ROOT,
+        element: <Suspense fallback={'...'}>
+            <SupervisorLayout />
+        </Suspense>,
+        children: [
+            {
+                path: ROUTES.SUPERVISOR.ROOT + '/:id',
+                element: <Suspense fallback={'...'}>
+                    <SupervidorAssignTask />
+                </Suspense>
             }
         ]
     }

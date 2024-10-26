@@ -3,6 +3,8 @@ import { baseInstance } from '../../configs';
 import { toast } from 'react-toastify';
 import { ErrorResponse } from '../../types';
 import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../../app';
 
 
 const getAllTasksService = async () => {
@@ -204,13 +206,27 @@ const submitTaskService = async (
 };
 
 export const useSubmitTask = () => {
+    const navigate = useNavigate()
     return useMutation({
         mutationFn: submitTaskService,
         onError(ex: AxiosError<ErrorResponse>) {
             toast.error(ex?.response?.data?.message || 'مشکلی پیش آمد');
         },
         onSuccess() {
-            toast.success('فیلد با موفقیت ایجاد شد!');
+            toast.success('ماموریت با موفقیت ارسال شد');
+            navigate(ROUTES.HOME.MANAGEMENT())
         }
+    });
+};
+
+const getAllTaskSubmittionsService = async () => {
+    const response = await baseInstance.get('/tasks/submissions');
+    return response.data;
+};
+
+export const useGetAllTaskSubmittions = () => {
+    return useQuery({
+        queryKey: ['all-task-fields'],
+        queryFn: getAllTaskSubmittionsService,
     });
 };
