@@ -9,6 +9,7 @@ const getProfileService = async () => {
 };
 
 export const useGetProfile = () => {
+
     return useQuery({
         queryKey: ['profile'],
         queryFn: getProfileService,

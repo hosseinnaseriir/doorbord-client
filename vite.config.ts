@@ -5,6 +5,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      'date-fns-jalali/_lib/format/longFormatters': 'date-fns-jalali/esm/_lib/format/longFormatters',
+    },
+  },
   plugins: [react(), tsconfigPaths(),
   VitePWA({
     registerType: 'autoUpdate',
