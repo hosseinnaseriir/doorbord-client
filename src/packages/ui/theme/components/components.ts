@@ -1,5 +1,5 @@
 import { Components, CssVarsTheme, Theme } from "@mui/material";
-import { MuiButton, MuiTextField, MuiInputLabel, MuiFormControlLabel, MuiFormHelperText, MuiSelect } from "./input";
+import { MuiButton, MuiTextField, MuiInputLabel, MuiFormControlLabel, MuiFormHelperText, MuiSelect, MuiCheckbox } from "./input";
 import { MuiMenuItem, MuiTypography } from "./dataDisplay";
 export const components: Components<Omit<Theme, "components" | "palette"> & CssVarsTheme> = {
     MuiButton,
@@ -10,4 +10,5 @@ export const components: Components<Omit<Theme, "components" | "palette"> & CssV
     MuiSelect,
     MuiMenuItem,
     MuiTypography,
+    MuiCheckbox,
 }

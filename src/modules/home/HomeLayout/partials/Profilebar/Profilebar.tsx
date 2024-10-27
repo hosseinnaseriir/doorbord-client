@@ -11,7 +11,7 @@ export const Profilebar = () => {
     const fullName = `${profile?.profile?.user?.firstName ?? ''} ${profile?.profile?.user?.lastName ?? ''}`;
 
     return (
-        <Container sx={{
+        <Container maxWidth="sm" sx={{
             py: 2
         }}>
             <Box sx={{

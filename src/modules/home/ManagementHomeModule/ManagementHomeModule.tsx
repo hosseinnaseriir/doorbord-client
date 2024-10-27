@@ -18,7 +18,7 @@ export const ManagementHomeModule = () => {
         setTabValue(newValue);
     };
     return (
-        <Container>
+        <Container maxWidth="sm">
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs sx={{

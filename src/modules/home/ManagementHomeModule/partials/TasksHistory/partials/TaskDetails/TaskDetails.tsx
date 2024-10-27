@@ -16,7 +16,7 @@ export const TaskDetails: React.FC<{
         <Drawer anchor="bottom" onClose={() => {
             props.setOpenRequestDrawer(false)
         }} open={!!props.openRequestDrawer}>
-            <Container sx={{
+            <Container maxWidth="sm" sx={{
                 pt: 2,
                 pb: 5
             }}>
